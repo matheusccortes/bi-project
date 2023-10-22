@@ -1,6 +1,6 @@
 USE MonsonUniversity;
 
--- Insira valores na tabela Departments 
+-- Insira registros na tabela Departments 
 INSERT INTO Departments (DepartmentCode, DepartmentName)
 VALUES
     ('ADMN', 'Administration, Admissions, and Students Affairs'),
@@ -17,7 +17,7 @@ VALUES
     ('CMST', 'Computer Studies'),
     ('HGPS', 'History, Geography, and Political Sciences');
 
--- Insira valores na tabela Employees
+-- Insira registros na tabela Employees
 INSERT INTO Employees (EmployeeNumber, FirstName, MiddleName, LastName, DepartmentCode, Title, Notes)
 VALUES
     ('279227', 'Donald', 'Henry', 'Leighton', 'ADMN', 'President', NULL),
@@ -42,7 +42,7 @@ VALUES
     ('582007', 'Alexander', NULL, 'Nolan', 'CMSC', 'Dean of Computer Sciences and Computer Engineering', NULL),
     ('400384', 'Jennifer', NULL, 'Palermo', 'HRMN', 'Dean of Human Resources and Management Studies', NULL);
 
--- Insira valores na tabela Semesters
+-- Insira registros na tabela Semesters
 INSERT INTO Semesters (Semester)
 VALUES
     ('SPRING 2012'),
@@ -55,14 +55,14 @@ VALUES
     ('SUMMER 2014'),
     ('FALL 2014');
 
--- Insira valores na tabela CourseDeliveryTypes
+-- Insira registros na tabela CourseDeliveryTypes
 INSERT INTO CourseDeliveryTypes (CourseDeliveryTypeCode, CourseDeliveryType, Notes)
 VALUES
     ('F', 'Face-to-Face', 'The course will be taught in a classroom. Consult the schedule to find out how often the class will meet.'),
     ('L', 'Online', 'The course will be delivered over the Web and other means of remote communications such as video and/or conference call.'),
     ('H', 'Hybrid', 'The course will be taught face-to-face part-time and online part-time. For example, the teacher and students may meet face-to-face in one session and online for the next section. Consult the course schedule or the teacher to communicate how the class will be conducted.');
 
--- Insira valores na tabela Locations
+-- Insira registros na tabela Locations
 INSERT INTO Locations (LocationCode, LocationName)
 VALUES
     ('ADMAS', 'Administration & Auxiliary Services'),
@@ -80,7 +80,7 @@ VALUES
     ('SECRB', 'Security Building'),
     ('ONLNE', 'Online');
 
--- Insira valores na tabela UndergraduateMajors
+-- Insira registros na tabela UndergraduateMajors
 INSERT INTO UndergraduateMajors (Major, Dean)
 VALUES
     ('English', '161138'),
@@ -104,7 +104,7 @@ VALUES
     ('Information Systems Management', '927486'),
     ('Computer Information Technology', '927486');
 
--- Insira valores na tabela Minors
+-- Insira registros na tabela Minors
 INSERT INTO Minors (Minor)
 VALUES
     ('English'),
@@ -132,15 +132,14 @@ VALUES
     ('Gerontology'),
     ('Women''s Studies');
 
-
--- Insira valores na tabela TeachersStatus
+-- Insira registros na tabela TeachersStatus
 INSERT INTO TeachersStatus (TeacherStatusCode, TeacherStatus, Notes)
 VALUES
     ('A', 'Active', 'The teacher is currently available.'),
     ('N', 'Not Available', 'The teacher is not available to teach in the current semester, for any reason.'),
     ('S', 'Suspended', 'The teacher''s teaching ability is currently problematic or under question.');
 
--- Insira valores na tabela Teachers
+-- Insira registros na tabela Teachers
 INSERT INTO Teachers(TeacherNumber, FirstName, MiddleName, LastName, Degrees, DepartmentCode, TeacherStatusCode)
 VALUES
     ('293800', 'Sarah', 'Annette', 'Corso', 'BS, MA, MS, PhD', 'CMST', 'A'),
@@ -204,7 +203,7 @@ VALUES
     ('377468', 'Michael', NULL, 'Olney', 'PhD', NULL, 'A'),
     ('516624', 'Santina', NULL, 'Mathis','PhD', 'CMSC', 'A');
 
--- Insira valores na tabela UndergraduateCourses
+-- Insira registros na tabela UndergraduateCourses
 INSERT INTO UndergraduateCourses (CourseCode, CourseName, Credits) VALUES ('BEHS 220', 'Diversity Awareness', 3);
 INSERT INTO UndergraduateCourses (CourseCode, CourseName, Credits) VALUES ('BEHS 365', 'Individuals, Society and Environmental Sustainability', 3);
 INSERT INTO UndergraduateCourses (CourseCode, CourseName, Credits) VALUES ('BMGT 304', 'Managing E-Commerce in Organizations', 3);
@@ -626,7 +625,118 @@ INSERT INTO UndergraduateCourses (CourseCode, CourseName, Credits, Prerequisites
 INSERT INTO UndergraduateCourses (CourseCode, CourseName, Credits, Prerequisites) VALUES ('PHIL 315', 'Justice, Law, & Morality', 3, 'PHIL 100');
 INSERT INTO UndergraduateCourses (CourseCode, CourseName, Credits, Prerequisites) VALUES ('PHIL 410', 'Biological Philosophy', 3, 'PHIL 160');
 
--- Insira valores na tabela UndergraduateStudents
+-- Insira registros na tabela UndergraduateCoursesTaught
+INSERT INTO UndergraduateCoursesTaught (TeacherNumber, CourseCode)
+VALUES
+    ('293800', 'CMIT 410'),
+    ('293800', 'CMIT 411'),
+    ('293800', 'IFSM 300'),
+    ('293800', 'IFSM 311'),
+    ('588030', 'ENGL 240'),
+    ('588030', 'ENGL 245'),
+    ('588030', 'ENGL 260'),
+    ('588030', 'ENGL 302'),
+    ('588030', 'ENGL 352'),
+    ('588030', 'ENGL 353'),
+    ('588030', 'ENGL 362'),
+    ('588030', 'ENGL 385'),
+    ('588030', 'ENGL 402'),
+    ('588030', 'ENGL 403'),
+    ('588030', 'ENGL 404'),
+    ('796137', 'ENGL 101'),
+    ('796137', 'SPCH 101'),
+    ('796137', 'SPCH 122'),
+    ('796137', 'ENGL 105'),
+    ('796137', 'ENGL 105'),
+    ('796137', 'ENGL 154'),
+    ('796137', 'ENGL 155'),
+    ('796137', 'BMGT 110'),
+    ('729380', 'FINA 101'),
+    ('729380', 'FINA 102'),
+    ('729380', 'FINA 104'),
+    ('729380', 'ECON 101'),
+    ('729380', 'FINA 200'),
+    ('729380', 'FINA 202'),
+    ('729380', 'FINA 204'),
+    ('729380', 'FINA 205'),
+    ('729380', 'FINA 211'),
+    ('297200', 'FINA 240'),
+    ('297200', 'FINA 241'),
+    ('297200', 'FINA 300'),
+    ('297200', 'FINA 301'),
+    ('297200', 'FINA 303'),
+    ('297200', 'FINA 304'),
+    ('592073', 'FINA 320'),
+    ('592073', 'FINA 321'),
+    ('592073', 'FINA 420'),
+    ('592073', 'FINA 422'),
+    ('592073', 'FINA 412'),
+    ('397480', 'ECON 101'),
+    ('397480', 'ECON 152'),
+    ('397480', 'ECON 200'),
+    ('397480', 'ECON 201'),
+    ('397480', 'ECON 211'),
+    ('397480', 'ECON 212'),
+    ('397480', 'ECON 260'),
+    ('860384', 'ECON 300'),
+    ('860384', 'ECON 301'),
+    ('860384', 'ECON 312'),
+    ('860384', 'ECON 313'),
+    ('860384', 'ECON 314'),
+    ('860384', 'ECON 315'),
+    ('860384', 'ECON 321'),
+    ('860384', 'ECON 322'),
+    ('860384', 'ECON 330'),
+    ('203080', 'ECON 400'),
+    ('203080', 'ECON 402'),
+    ('203080', 'ECON 412'),
+    ('203080', 'ECON 413'),
+    ('203080', 'ECON 414'),
+    ('203080', 'ECON 421'),
+    ('203080', 'ECON 422'),
+    ('203080', 'ECON 444'),
+    ('520203', 'MATH 009'),
+    ('928007', 'MATH 012'),
+    ('800704', 'MATH 102'),
+    ('520203', 'MATH 103'),
+    ('520203', 'MATH 115'),
+    ('520203', 'MATH 130'),
+    ('640840', 'MATH 140'),
+    ('640840', 'MATH 141'),
+    ('640840', 'MATH 212'),
+    ('640840', 'MATH 213'),
+    ('800704', 'MATH 214'),
+    ('640840', 'MATH 220'),
+    ('800704', 'MATH 241'),
+    ('800704', 'MATH 246'),
+    ('160205', 'CMSC 101'),
+    ('160205', 'CMSC 103'),
+    ('160205', 'CMSC 104'),
+    ('160205', 'CMSC 220'),
+    ('160205', 'CMSC 101'),
+    ('160205', 'CMSC 102'),
+    ('160205', 'CMSC 140'),
+    ('160205', 'CMSC 220'),
+    ('160205', 'CMSC 330'),
+    ('927144', 'CMSC 206'),
+    ('927144', 'CMSC 236'),
+    ('797229', 'CMSC 322'),
+    ('797229', 'CMSC 140'),
+    ('516624', 'CMSC 332'),
+    ('516624', 'CMSC 320'),
+    ('516624', 'CMSC 236'),
+    ('927144', 'CMSC 334'),
+    ('797229', 'CMSC 360'),
+    ('160205', 'CMSC 206'),
+    ('516624', 'CMSC 400'),
+    ('927144', 'CMSC 420'),
+    ('516624', 'CMSC 440'),
+    ('797229', 'CMSC 422'),
+    ('229374', 'HIST 302'),
+    ('229374', 'HIST 326'),
+    ('229374', 'GVPT 442');
+
+-- Insira registros na tabela UndergraduateStudents
 INSERT INTO UndergraduateStudents VALUES('88130480', 'Marie', 'Annette', 'Robinson', 3, 3, NULL);
 INSERT INTO UndergraduateStudents VALUES('24795711', 'Roger', 'Dermot', 'Baker', 5, 2, NULL);
 INSERT INTO UndergraduateStudents VALUES('18073572', 'Patrick', NULL, 'Wisne', 01, 10, NULL);
@@ -691,7 +801,7 @@ INSERT INTO UndergraduateStudents VALUES('92747957', 'David', NULL, 'Cost', 20, 
 INSERT INTO UndergraduateStudents VALUES('20804685', 'Edward', NULL, 'Pomerantz', 01, 13, NULL);
 INSERT INTO UndergraduateStudents VALUES('22285225', 'Marc', NULL, 'Hawksworth', 09, 04, NULL);
 
--- Insere registros na tabela UndergraduateSchedules
+-- Insira registros na tabela UndergraduateSchedules
 INSERT INTO UndergraduateSchedules (SemesterID, StartDate, EndDate, StartTime, EndTime, Weekdays, TeacherNumber, TANumber, CourseCode, CourseDeliveryTypeCode, LocationCode, RoomNumber)
 VALUES
     (1, '2012-01-09', '2012-03-18', '08:15:00', '10:00:00', 'M-W', 160205, NULL, 'CMSC 101', 'F', 'SEAMT', '402'),
@@ -815,7 +925,7 @@ VALUES
     ('Passed', 'The student successfully passed the course.'),
     ('Failed', 'The student did not satisfy the final requirements of the course');
 
--- Insira registros na tabela PassesFailsStatus
+-- Insira registros na tabela UndergraduateRegistrations
 INSERT INTO UndergraduateRegistrations (RegistrationDate, StudentNumber, UndergraduateScheduleID, PassFailStatus)
 VALUES
     ('2011-10-12', 24757420, 062, 'Passed'), -- S     08:30 - 17:30
