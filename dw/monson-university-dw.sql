@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `dw-monson-university`.`DIM_PROFESSOR` (
 -- Table `dw-monson-university`.`DIM_CURSO`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `dw-monson-university`.`DIM_CURSO` (
-  `id_curso` INT NOT NULL PRIMARY KEY,
+  `id_curso` VARCHAR(15) NOT NULL PRIMARY KEY,
   `nm_curso` VARCHAR(150),
   `flag_pre_requisito` BOOLEAN,
   `modalidade` VARCHAR(50)
@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS `dw-monson-university`.`DIM_CURSO` (
 -- Table `dw-monson-university`.`DIM_TEMPO`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `dw-monson-university`.`DIM_TEMPO` (
-  `inicio_referencia` INT NOT NULL PRIMARY KEY,
+  `inicio_referencia` DATETIME NOT NULL PRIMARY KEY,
   `dias_da_semana` VARCHAR(45),
   `mes` VARCHAR(45),
   `turno` VARCHAR(45),
@@ -58,7 +58,7 @@ CREATE TABLE IF NOT EXISTS `dw-monson-university`.`DIM_TEMPO` (
 CREATE TABLE IF NOT EXISTS `dw-monson-university`.`FATO_AGENDAMENTO_CRONOGRAMA` (
   `id_cronograma` INT NOT NULL PRIMARY KEY,
   `id_professor` INT,
-  `id_curso` INT,
+  `id_curso` VARCHAR(15),
   `qnt_dias_letivos` INT,
   `carga_horaria_minutos` INT,
   `qtd_alunos_aprovados` INT,
