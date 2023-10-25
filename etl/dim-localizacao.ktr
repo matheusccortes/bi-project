@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>etl-course</name>
+    <name>etl-localizacao</name>
     <description/>
     <extended_description/>
     <trans_version/>
     <trans_type>Normal</trans_type>
+    <trans_status>0</trans_status>
     <directory>/</directory>
     <parameters>
     </parameters>
@@ -563,207 +564,13 @@
   </connection>
   <order>
     <hop>
-      <from>Extract courses with a schedule</from>
-      <to>Create flag_pre_requisito</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Extract course delivery type code</from>
-      <to>Create course type code</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Create flag_pre_requisito</from>
-      <to>Create course type code</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Create course type code</from>
-      <to>Map course type code</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Map course type code</from>
-      <to>Load DIM_CURSO</to>
+      <from>Importando dados de localizacao</from>
+      <to>Carregando dados DIM_LOCALIDADE</to>
       <enabled>Y</enabled>
     </hop>
   </order>
   <step>
-    <name>Create course type code</name>
-    <type>StreamLookup</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <from>Extract course delivery type code</from>
-    <input_sorted>N</input_sorted>
-    <preserve_memory>N</preserve_memory>
-    <sorted_list>N</sorted_list>
-    <integer_pair>Y</integer_pair>
-    <lookup>
-      <key>
-        <name>CourseCode</name>
-        <field>CourseCode</field>
-      </key>
-      <value>
-        <name>CourseDeliveryTypeCode</name>
-        <rename>course_type_code</rename>
-        <default/>
-        <type>None</type>
-      </value>
-    </lookup>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>688</xloc>
-      <yloc>160</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Create flag_pre_requisito</name>
-    <type>ScriptValueMod</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <compatible>N</compatible>
-    <optimizationLevel>9</optimizationLevel>
-    <jsScripts>
-      <jsScript>
-        <jsScript_type>0</jsScript_type>
-        <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>var flag_pre_requisito = Prerequisites !== null
-
-</jsScript_script>
-      </jsScript>
-    </jsScripts>
-    <fields>
-      <field>
-        <name>flag_pre_requisito</name>
-        <rename>flag_pre_requisito</rename>
-        <type>Boolean</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>448</xloc>
-      <yloc>160</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Extract course delivery type code</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>mu-data</connection>
-    <sql>SELECT uc.CourseCode, cdt.CourseDeliveryTypeCode
-FROM UndergraduateCourses uc 
-JOIN UndergraduateSchedules us ON uc.CourseCode = us.CourseCode
-JOIN CourseDeliveryTypes cdt ON us.CourseDeliveryTypeCode = cdt.CourseDeliveryTypeCode
-GROUP BY uc.CourseCode, cdt.CourseDeliveryTypeCode;
-</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <cached_row_meta_active>N</cached_row_meta_active>
-    <row-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>CourseCode</name>
-        <length>8</length>
-        <precision>-1</precision>
-        <origin>Extract course delivery type code</origin>
-        <comments>CourseCode</comments>
-        <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>pt_BR</date_format_locale>
-        <date_format_timezone>America/Sao_Paulo</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>CourseDeliveryTypeCode</name>
-        <length>1</length>
-        <precision>-1</precision>
-        <origin>Extract course delivery type code</origin>
-        <comments>CourseDeliveryTypeCode</comments>
-        <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>pt_BR</date_format_locale>
-        <date_format_timezone>America/Sao_Paulo</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-    </row-meta>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>688</xloc>
-      <yloc>16</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Extract courses with a schedule</name>
+    <name>Importando dados de localizacao</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -775,11 +582,9 @@ GROUP BY uc.CourseCode, cdt.CourseDeliveryTypeCode;
     </partitioning>
     <connection>mu-data</connection>
     <sql>SELECT
-  uc.CourseCode
-, uc.CourseName
-, uc.Prerequisites
-FROM MonsonUniversity.UndergraduateCourses uc
-JOIN MonsonUniversity.UndergraduateSchedules us ON uc.CourseCode = us.CourseCode
+  LocationCode
+, LocationName
+FROM MonsonUniversity.Locations
 </sql>
     <limit>0</limit>
     <lookup/>
@@ -791,11 +596,11 @@ JOIN MonsonUniversity.UndergraduateSchedules us ON uc.CourseCode = us.CourseCode
       <value-meta>
         <type>String</type>
         <storagetype>normal</storagetype>
-        <name>CourseCode</name>
-        <length>8</length>
+        <name>LocationCode</name>
+        <length>5</length>
         <precision>-1</precision>
-        <origin>Extract courses</origin>
-        <comments>CourseCode</comments>
+        <origin>Table input</origin>
+        <comments>LocationCode</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
         <grouping_symbol>.</grouping_symbol>
@@ -814,34 +619,11 @@ JOIN MonsonUniversity.UndergraduateSchedules us ON uc.CourseCode = us.CourseCode
       <value-meta>
         <type>String</type>
         <storagetype>normal</storagetype>
-        <name>CourseName</name>
-        <length>100</length>
+        <name>LocationName</name>
+        <length>50</length>
         <precision>-1</precision>
-        <origin>Extract courses</origin>
-        <comments>CourseName</comments>
-        <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>pt_BR</date_format_locale>
-        <date_format_timezone>America/Sao_Paulo</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>Prerequisites</name>
-        <length>100</length>
-        <precision>-1</precision>
-        <origin>Extract courses</origin>
-        <comments>Prerequisites</comments>
+        <origin>Table input</origin>
+        <comments>LocationName</comments>
         <conversion_Mask/>
         <decimal_symbol>,</decimal_symbol>
         <grouping_symbol>.</grouping_symbol>
@@ -867,13 +649,13 @@ JOIN MonsonUniversity.UndergraduateSchedules us ON uc.CourseCode = us.CourseCode
       </output>
     </remotesteps>
     <GUI>
-      <xloc>208</xloc>
-      <yloc>160</yloc>
+      <xloc>224</xloc>
+      <yloc>144</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Load DIM_CURSO</name>
+    <name>Carregando dados DIM_LOCALIDADE</name>
     <type>InsertUpdate</type>
     <description/>
     <distribute>Y</distribute>
@@ -888,31 +670,21 @@ JOIN MonsonUniversity.UndergraduateSchedules us ON uc.CourseCode = us.CourseCode
     <update_bypassed>N</update_bypassed>
     <lookup>
       <schema>dw-monson-university</schema>
-      <table>DIM_CURSO</table>
+      <table>DIM_LOCALIDADE</table>
       <key>
-        <name>CourseCode</name>
-        <field>id_curso</field>
+        <name>LocationCode</name>
+        <field>id_localidade</field>
         <condition>=</condition>
         <name2/>
       </key>
       <value>
-        <name>id_curso</name>
-        <rename>CourseCode</rename>
+        <name>id_localidade</name>
+        <rename>LocationCode</rename>
         <update>Y</update>
       </value>
       <value>
-        <name>nm_curso</name>
-        <rename>CourseName</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>flag_pre_requisito</name>
-        <rename>flag_pre_requisito</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>modalidade</name>
-        <rename>modalidade</rename>
+        <name>nm_localidade</name>
+        <rename>LocationName</rename>
         <update>Y</update>
       </value>
     </lookup>
@@ -925,50 +697,8 @@ JOIN MonsonUniversity.UndergraduateSchedules us ON uc.CourseCode = us.CourseCode
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1112</xloc>
-      <yloc>160</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Map course type code</name>
-    <type>ValueMapper</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <field_to_use>course_type_code</field_to_use>
-    <target_field>modalidade</target_field>
-    <non_match_default/>
-    <fields>
-      <field>
-        <source_value>F</source_value>
-        <target_value>Presencial</target_value>
-      </field>
-      <field>
-        <source_value>H</source_value>
-        <target_value>Híbrido</target_value>
-      </field>
-      <field>
-        <source_value>L</source_value>
-        <target_value>Online</target_value>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>912</xloc>
-      <yloc>160</yloc>
+      <xloc>464</xloc>
+      <yloc>144</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

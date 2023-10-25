@@ -43,12 +43,9 @@ CREATE TABLE IF NOT EXISTS `dw-monson-university`.`DIM_CURSO` (
 -- -----------------------------------------------------
 -- Table `dw-monson-university`.`DIM_TEMPO`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `dw-monson-university`.`DIM_TEMPO` (
-  `inicio_referencia` DATETIME NOT NULL PRIMARY KEY,
-  `dias_da_semana` VARCHAR(45),
-  `mes` VARCHAR(45),
-  `turno` VARCHAR(45),
-  `flag_feriado` BOOLEAN
+CREATE TABLE IF NOT EXISTS `dw-monson-university`.`DIM_LOCALIDADE` (
+  `id_localidade` VARCHAR(10) NOT NULL PRIMARY KEY,
+  `nm_localidade` VARCHAR(100)
   );
 
 
@@ -59,18 +56,19 @@ CREATE TABLE IF NOT EXISTS `dw-monson-university`.`FATO_AGENDAMENTO_CRONOGRAMA` 
   `id_cronograma` INT NOT NULL PRIMARY KEY,
   `id_professor` INT,
   `id_curso` VARCHAR(15),
+  `id_localidade` VARCHAR(10),
   `qnt_dias_letivos` INT,
   `carga_horaria_minutos` INT,
-  `qtd_alunos_aprovados` INT,
+  `qnt_alunos_aprovados` INT,
+  `qnt_alunos_reprovados` INT,
   `creditos_ofertados` INT,
-  `flag_aula_auxiliada` BOOLEAN,
-  `data_inicio` DATETIME NULL
+  `flag_aula_auxiliada` BOOLEAN
   );
 
   ALTER TABLE FATO_AGENDAMENTO_CRONOGRAMA
     ADD FOREIGN KEY (id_professor) REFERENCES DIM_PROFESSOR(id_professor),
     ADD FOREIGN KEY (id_curso) REFERENCES DIM_CURSO(id_curso),
-    ADD FOREIGN KEY (data_inicio) REFERENCES DIM_TEMPO(inicio_referencia);
+    ADD FOREIGN KEY (id_localidade) REFERENCES DIM_LOCALIDADE(id_localidade);
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
